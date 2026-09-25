@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "PayGame Auto Relist (Test)",
+  "version": "2.0",
+  "description": "Перевыставляет проданные лоты (по списку /seller/offers)",
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://paygame.ru/*",
+    "https://api.paygame.ru/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "PayGame Auto Relist"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://paygame.ru/seller/offers*"],
+      "js": ["content-offers.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://paygame.ru/seller/orders*"],
+      "js": ["content-orders.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://paygame.ru/orders/*"],
+      "js": ["content-order.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://paygame.ru/seller/offers/*/edit*"],
+      "js": ["content-edit.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { width: 480px; background:#0d1117; color:#e6edf3; font-family:-apple-system,'Segoe UI',Roboto,sans-serif; padding:12px; margin:0; }
+    h1 { font-size:14px; color:#ff6b35; margin:0 0 8px 0; }
+    .status-box { padding:10px; border-radius:8px; text-align:center; font-weight:600; margin-bottom:8px; font-size:12px; background:rgba(255,255,255,0.04); color:#666; }
+    .status-box.on { background:rgba(0,200,100,0.15); color:#00c864; animation:pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.6} }
+    .btn { width:100%; padding:11px; border:none; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; margin-bottom:8px; font-family:inherit; }
+    .green { background:rgba(0,200,100,0.2); color:#00c864; border:1px solid rgba(0,200,100,0.3); }
+    .green:hover { background:rgba(0,200,100,0.35); color:#fff; }
+    .green:disabled { opacity:0.4; cursor:not-allowed; }
+    .gray { background:rgba(255,255,255,0.06); color:#e6edf3; border:1px solid rgba(255,255,255,0.08); }
+    .gray:hover { background:rgba(255,255,255,0.12); }
+    .card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:8px; padding:10px; margin-bottom:8px; font-size:12px; }
+    .row { display:flex; justify-content:space-between; align-items:center; padding:4px 0; }
+    .label { font-size:11px; color:#888; }
+    .toggle { position:relative; display:inline-block; width:40px; height:20px; }
+    .toggle input { opacity:0; width:0; height:0; }
+    .slider { position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background:rgba(255,255,255,0.1); transition:0.3s; border-radius:20px; }
+    .slider:before { position:absolute; content:""; height:16px; width:16px; left:2px; bottom:2px; background:#fff; transition:0.3s; border-radius:50%; }
+    input:checked + .slider { background:#ff6b35; }
+    input:checked + .slider:before { transform:translateX(20px); }
+    select { background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); color:#e6edf3; padding:4px 8px; border-radius:6px; font-size:12px; font-family:inherit; }
+    .stats-grid { display:grid; grid-template-columns: 1fr 1fr; gap:6px; }
+    .stat-item { text-align:center; padding:6px; background:rgba(255,255,255,0.03); border-radius:6px; }
+    .stat-value { font-size:16px; font-weight:700; color:#ff6b35; }
+    .stat-label { font-size:10px; color:#666; }
+    .log { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:8px; padding:10px; font-size:11px; font-family:'Consolas',monospace; max-height:220px; overflow-y:auto; color:#888; line-height:1.5; }
+    .log div { padding:1px 0; word-break:break-word; }
+    .log .ok { color:#00c864; }
+    .log .err { color:#ff4444; }
+    .log .warn { color:#ffcc00; }
+    .log .info { color:#4a9eff; }
+    .log .dim { color:#555; }
+  </style>
+</head>
+<body>
+  <h1>🔁 PayGame Auto Relist</h1>
+  <div class="status-box" id="status">Готов к работе</div>
+
+  <div class="card">
+    <div class="row">
+      <span class="label">⏰ Авто-режим</span>
+      <label class="toggle"><input type="checkbox" id="autoToggle"><span class="slider"></span></label>
+    </div>
+    <div class="row">
+      <span class="label">Интервал</span>
+      <select id="autoInterval">
+        <option value="1">1 мин</option>
+        <option value="5" selected>5 мин</option>
+        <option value="10">10 мин</option>
+        <option value="30">30 мин</option>
+        <option value="60">1 час</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="stats-grid">
+      <div class="stat-item"><div class="stat-value" id="statSuccess">0</div><div class="stat-label">успешно</div></div>
+      <div class="stat-item"><div class="stat-value" id="statFailed">0</div><div class="stat-label">ошибок</div></div>
+      <div class="stat-item"><div class="stat-value" id="statSkipped">0</div><div class="stat-label">пропущено</div></div>
+      <div class="stat-item"><div class="stat-value" id="statToday">0</div><div class="stat-label">за сегодня</div></div>
+    </div>
+  </div>
+
+  <button class="btn green" id="startBtn">🔁 ПЕРЕВЫСТАВИТЬ ПРОДАННОЕ</button>
+  <button class="btn gray" id="openLogBtn">📜 Открыть полный лог</button>
+  <button class="btn gray" id="clearBtn">🗑 Очистить лог</button>
+
+  <div class="log" id="log">
+    <div class="dim">Нажми «Перевыставить проданное» — бот найдёт проблемные лоты и обработает их.</div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

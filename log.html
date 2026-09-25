@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>PayGame Auto Relist — Лог</title>
+  <style>
+    body { background:#0d1117; color:#e6edf3; font-family:-apple-system,'Segoe UI',Roboto,sans-serif; padding:16px; margin:0; }
+    h1 { font-size:16px; color:#ff6b35; margin:0 0 12px 0; }
+    .toolbar { display:flex; gap:8px; margin-bottom:12px; }
+    .btn { padding:8px 16px; border:none; border-radius:6px; font-size:12px; font-weight:600; cursor:pointer; font-family:inherit; }
+    .btn-gray { background:rgba(255,255,255,0.06); color:#e6edf3; border:1px solid rgba(255,255,255,0.08); }
+    .btn-gray:hover { background:rgba(255,255,255,0.12); }
+    .btn-red { background:rgba(255,0,0,0.12); color:#ff4444; border:1px solid rgba(255,0,0,0.2); }
+    .btn-red:hover { background:rgba(255,0,0,0.25); color:#fff; }
+    .log { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:8px; padding:14px; font-size:12px; font-family:'Consolas',monospace; line-height:1.6; }
+    .log div { padding:2px 0; word-break:break-word; }
+    .log .ok { color:#00c864; }
+    .log .err { color:#ff4444; }
+    .log .warn { color:#ffcc00; }
+    .log .info { color:#4a9eff; }
+    .log .dim { color:#555; }
+    .empty { text-align:center; color:#555; padding:40px; }
+  </style>
+</head>
+<body>
+  <h1>📜 PayGame Auto Relist — Полный лог</h1>
+  <div class="toolbar">
+    <button class="btn btn-gray" id="refreshBtn">🔄 Обновить</button>
+    <button class="btn btn-red" id="clearBtn">🗑 Очистить</button>
+  </div>
+  <div class="log" id="log"><div class="empty">Загрузка...</div></div>
+  <script src="log.js"></script>
+</body>
+</html>
